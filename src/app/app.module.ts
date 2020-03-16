@@ -12,9 +12,12 @@ import { AppComponent } from './app.component';
 //servicios
 import { ListaDeseosService } from '../app/services/lista-deseos.service';
 
+
+
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent ],
+  entryComponents: [ ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
