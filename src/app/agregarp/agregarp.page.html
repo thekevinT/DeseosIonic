@@ -1,6 +1,13 @@
 <ion-header [translucent]="true">
+
     <ion-toolbar color="primary">
+
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+
         <ion-title>
+
             {{ nombreLista }}
         </ion-title>
     </ion-toolbar>
@@ -24,9 +31,10 @@
 
             <ion-item>
                 <ion-label position="floating">Item:</ion-label>
-                <ion-input [(ngModel)]="nombreItem" name="nombreItem"></ion-input>
+                <ion-input (keyup.enter)="agregar()" [(ngModel)]="nombreItem" name="nombreItem"></ion-input>
             </ion-item>
-            <ion-button color="success">Agregar</ion-button>
+
+            <ion-button expand="block" color="success" (click)="agregar()">Agregar</ion-button>
 
         </ion-card-content>
 
@@ -36,16 +44,19 @@
 
     <ion-card>
         <ion-card-header>
-            <h3>Items Agregados</h3>
+            <h3>
+                <p style="color:white;">Items Agregados</p>
+
+            </h3>
         </ion-card-header>
 
         <ion-card-content>
             <ion-list>
-                <ion-item>
-                    <ion-button color="warning" clear>Nombre del item</ion-button>
+                <ion-item *ngFor="let item of items; let i = index">
+                    <ion-button color="dark" clear> {{ item.nombre }}</ion-button>
                     <ion-button color="danger">
                         <ion-icon name="trash-outline"></ion-icon>
-                        Borrar Item
+                        Borrar Item {{i}}
                     </ion-button>
                 </ion-item>
 
