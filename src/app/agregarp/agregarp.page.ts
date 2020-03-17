@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ListaItem, Lista } from '../../app/clases/index';
+import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+import { ListaDeseosService } from '../services/lista-deseos.service';
 
 
 
@@ -10,16 +13,25 @@ import { ListaItem, Lista } from '../../app/clases/index';
 })
 export class AgregarpPage implements OnInit {
 
-nombreLista:string;
-nombreItem:string;
+nombreLista:string = "";
+nombreItem:string = "";
 
 items: ListaItem[] = [];
 
-  constructor() { }
+  constructor( public alertController: AlertController, public navCtrl: NavController, public _listaDeseos: ListaDeseosService ) { }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'Nombre de la lista',
+      message: 'El nombre de la lista es necesario!.',
+      buttons: ['OK']
+    });
 
+    await alert.present();
+  }
   ngOnInit() {}
   agregar(){
-    if( this.nombreItem.length == 0){
+    if ( this.nombreItem.length == 0 ) {
         return;
       }
 
@@ -33,6 +45,19 @@ items: ListaItem[] = [];
   
   borrarItem( idx: number){
     this.items.splice(idx, 1);
+  }
+ 
+  guardarLista(){
+    if ( this.nombreLista.length == 0){
+      this.presentAlert();
+      return;
+    }
+
+    let lista = new Lista( this.nombreLista );
+    lista.items = this.items;
+
+    this._listaDeseos.listas.push( lista );
+    this.navCtrl.pop();
   }
 
 }
