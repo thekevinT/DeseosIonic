@@ -30,5 +30,9 @@ items: ListaItem[] = [];
     this.nombreItem = "";
 
   }
+  
+  borrarItem( idx: number){
+    this.items.splice(idx, 1);
+  }
 
 }
