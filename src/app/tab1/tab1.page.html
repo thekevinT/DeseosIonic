@@ -8,29 +8,32 @@
 
 <ion-content [fullscreen]="true">
 
-    <ion-card *ngFor="let lista of _listaDeseos.listas">
+    <ion-card *ngFor="let lista of _listaDeseos.listas; let i = index">
 
-        <ion-item>
+        <ion-item routerLink="/detalle">
+            <h2>
+                <p style="color:white;">{{ lista.nombre }}</p>
 
+            </h2>
+            <ion-note slot="end">
+                {{ lista.items.length}} items
+            </ion-note>
         </ion-item>
-        <h2>{{ lista.nombre }}</h2>
+
 
         <ion-list>
-            <ion-item>
-                <ion-icon name="caret-forward-circle-outline">
-                    Tetris
-                </ion-icon>
+            <ion-item routerLink="/detalle" *ngFor="let item of lista.items | slice:0:2">
+                <ion-icon *ngIf="!item.completado" name="square-outline"> </ion-icon>
+                <ion-icon *ngIf="item.completado" name="checkbox-outline"></ion-icon>
+                {{item.nombre}}
+
             </ion-item>
-            <ion-item>
-                <ion-icon name="caret-forward-circle-outline">
-                    Tetris
-                </ion-icon>
-            </ion-item>
-            <ion-item>
-                <ion-icon name="caret-forward-circle-outline">
-                    Tetris
-                </ion-icon>
-            </ion-item>
+
+            <ion-button expand="block" color="black" *ngIf="lista.items.length > 2">
+
+                <ion-icon name="arrow-down-circle-outline"></ion-icon>
+
+            </ion-button>
         </ion-list>
 
 

@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'agregarp',
     loadChildren: () => import('./agregarp/agregarp.module').then( m => m.AgregarpPageModule)
+  },
+  {
+    path: 'detalle',
+    loadChildren: () => import('./detalle/detalle.module').then( m => m.DetallePageModule)
   }
 ];
 @NgModule({

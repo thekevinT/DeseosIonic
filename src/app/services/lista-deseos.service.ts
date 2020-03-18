@@ -10,14 +10,33 @@ export class ListaDeseosService {
 
     constructor(){
 
-        let lista1 = new Lista('compras de supermercado');
+      /*  let lista1 = new Lista('compras de supermercado');
         let lista2 = new Lista('juegos que deseo');
         let lista3 = new Lista('cosas de la universidad');
 
        this.listas.push( lista1 );
        this.listas.push( lista2 );
-       this.listas.push( lista3 );
+       this.listas.push( lista3 );*/
+       this.cargarData();
 
         console.log("Servicio inicializado");
+    }
+
+    //local storage
+    actualizarData(){
+
+        localStorage.setItem( "data", JSON.stringify(this.listas) );
+
+    }
+    cargarData(){
+        if(localStorage.getItem("data")){
+
+            this.listas = JSON.parse(localStorage.getItem("data"));
+        }
+    }
+
+    agregarlista( lista: Lista){
+        this.listas.push(lista);
+        this.actualizarData();
     }
 }
